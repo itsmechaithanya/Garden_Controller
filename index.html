@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garden Controller</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"rel="stylesheet"/>
+    <script src="https://kit.fontawesome.com/f453e56a2f.js" crossorigin="anonymous"></script>
+    
+    <style>
+      @font-face {
+        font-family:Gilroy-SemiBold ;
+        src: url(./Gilroy-SemiBold.woff2);
+      }
+        *{ 
+        Margin:0;
+        Padding:0;
+        Box-sizing: border-box;
+        font-family: Gilroy-SemiBold;
+        }
+        html,body{
+        Width:100%;
+        Height:100%;  
+        }
+        #name{
+        height: 40vh;
+        width: 100%;
+        padding: 2vw;
+        border-bottom: solid 1px black;
+        }
+        #name>h1{
+            display: flex;
+            text-align: left;
+            
+            font-size: 10vw;
+            letter-spacing: -1px;
+            font-weight: 500;
+            line-height:8vw;
+            color:rgb(0, 0, 0);
+        }
+        #place{
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content:space-between;
+        }
+        #place>h4,#place h3{
+            font-size: 30px;
+            font-weight:400;
+            padding-left: 15px;
+        }
+        #nav{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px 10px;
+}
+#nav i{
+    padding-right: 5px;
+}
+#nav h3{
+    background-color:beige;
+    padding: 10px 14px;
+    border:none;
+    border-radius: 50px;
+    font-size: 18px;
+    box-shadow: 2px 6px 14px 2px rgba(0,0,0,0.2);
+}
+.dropdown {
+    margin: 1%;
+    position: relative;
+    display: inline-block;
+    padding: 12px 14px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight:500;
+    background-color:rgb(0, 0, 0); 
+    color: white;
+    border-radius: 60em; 
+    box-shadow: 2px 6px 14px 2px rgba(0,0,0,0.2);
+    border: none;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    color: #000;
+    background-color: rgb(255, 255, 255);
+    margin-top: 1vw;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 20px;
+    left: calc(50% - 10px); /* Adjust 80px to match button text width */
+    transform: translateX(-50%);
+}
+.dropdown-content a {
+    color: rgb(0, 0, 0);
+    width: 10vw;
+    padding: 15px 18px;
+    text-decoration: none;
+    display: block;
+    display: flex;
+
+    justify-content: space-evenly;
+    font-weight:200;
+}
+
+.dropdown-content a:hover {
+    color: #ffffff;
+    background-color: rgb(0, 0, 0);
+    border-radius: 20px;
+    display: flex;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* Show dropdown content when dropdown is active */
+.dropdown.active .dropdown-content {
+    display: block;
+}
+
+        #ttime{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100vw;
+            padding: 0vw 3vw;
+        }
+        #ftime,#stime{
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items:center;
+
+        }
+        #endTime,#startTime{
+            padding: .8vw 2vw;
+            margin: 1vw;
+            border: none;
+            border-radius: 5vw;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+        button {
+          padding: 10px 20px;
+          margin: 10px;
+          font-size: 16px;
+          border-radius: 5vw;
+          border: none;
+          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+       
+        #customDaysContainer{
+          padding: 2vw 10vw;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        #add{
+          display: flex;
+          align-items: center;
+          padding: 1vw 0vw;
+          justify-content: center;
+        }
+        #down{
+          padding: 1vw 5vw;
+          padding-bottom: 3vw;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+        }
+        #statuss{
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        #status {
+          font-size: 1.3vw;
+        }
+        #history {
+          margin-top: -2vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .day-checkbox {
+          display: none;
+        }
+        .day-checkbox + label {
+          cursor: pointer;
+          padding: 10px 20px;
+          display: inline-block;
+          margin-right: 10px;
+          border: none;
+          border-radius: 5vw;
+          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+        .day-checkbox:checked + label {
+            background-color: lightgreen;
+            color: rgb(0, 0, 0);
+        }
+        footer{
+            background-color:#EDEBEB;
+            width: 100vw;
+            height: 10vh;
+            text-align: center;
+            padding: 2%; 
+            border-top: 1px solid black;
+        }
+      </style>
+</head>
+<body>
+  <div id="name">
+    <h1>Garden<br>Controller</h1>
+    <div id="place">
+        <h3> - An NGE Industries Product - </h3>
+        <h4><i class="ri-arrow-right-down-line"></i>Home</h4>
+    </div>
+</div>
+<div id="nav">
+  <button class="dropdown"><i class="ri-settings-2-fill"></i> Settings</calssbutton>
+      <div class="dropdown-content">
+          <a href="Manual.html"><p>Manual</p><i class="fa-solid fa-screwdriver-wrench"></i></a>
+          <a href="Automatic.html"><p>Automatic</p><i class="fa-solid fa-robot"></i></a>
+      </div>
+</div> 
+    <div id="status" style="display: flex;align-items: center;justify-content: center;padding: 2.5vw;background-color:rgb(238, 235, 235);border-bottom: solid 1px black;"><h3>Motor Status:</h3> <span id="motorStatus">{{ motorStatus }}</span></div>
+    <div id="statuss">
+      <div id="status"style=" width: 50%;display: flex;align-items: center;justify-content: center;padding: 2.5vw;background-color:rgb(238, 235, 235);border-bottom: solid 1px black;"><h3>Rain Status:</h3> <span id="rainStatus">{{ rainStatus }}</span></div>
+    <div id="status"style=" width: 50%;display: flex;align-items: center;justify-content: center;padding: 2.5vw;background-color:rgb(238, 235, 235);border-bottom: solid 1px black;;border-left: solid 1px black"><h3>Soil Status:</h3> <span id="soilStatus">{{ soilStatus }}</span></div>
+    </div>
+    
+    <!-- <div id="mid">
+      <input type="checkbox" id="allDays" name="allDays">
+      <label for="allDays"><h4>All Days</h4></label>
+      <input type="checkbox" id="alternateDays" name="alternateDays">
+      <label for="alternateDays"><h4>Alternate Days</h4></label>
+      <input type="checkbox" id="customDays" name="customDays">
+      <label for="customDays"><h4>Custom Days</h4></label>
+    </div>
+    <div id="customDaysContainer">
+        <input type="checkbox" id="monday" name="days" value="Monday" class="day-checkbox">
+        <label for="monday">Monday</label>
+        <input type="checkbox" id="tuesday" name="days" value="Tuesday" class="day-checkbox">
+        <label for="tuesday">Tuesday</label>
+        <input type="checkbox" id="wednesday" name="days" value="Wednesday" class="day-checkbox">
+        <label for="wednesday">Wednesday</label>
+        <input type="checkbox" id="thursday" name="days" value="Thursday" class="day-checkbox">
+        <label for="thursday">Thursday</label>
+        <input type="checkbox" id="friday" name="days" value="Friday" class="day-checkbox">
+        <label for="friday">Friday</label>
+        <input type="checkbox" id="saturday" name="days" value="Saturday" class="day-checkbox">
+        <label for="saturday">Saturday</label>
+        <input type="checkbox" id="sunday" name="days" value="Sunday" class="day-checkbox">
+        <label for="sunday">Sunday</label>
+      </div> -->
+
+
+    <br>
+    <div id="schedules" style=" height: 30vh; margin-top: -2vh; ">
+      <h3 style="font-size: 1.8vw; padding: 2vw; background-color:rgb(238, 235, 235); border-bottom: solid black 1px; text-align: center;">Schedules:</h3 >
+      <ul id="scheduleList" style="display: flex; height: 10vh; flex-direction: column;align-items: center; margin-top: 2vw;">
+        {% for schedule in schedules %}
+        <li>
+          {{ schedule.start }} - {{ schedule.end }} ({{ schedule.days }})
+            <button onclick="removeSchedule('{{ schedule.start }}', '{{ schedule.end }}')">Remove</button>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <br>
+    <div id="history" style="height: 10vh; background-color:rgb(238, 235, 235); border-top: #000 solid 1px;">
+      <h3>History Log:</h3>
+      <ul id="historyLog"></ul>
+    </div>
+    <footer>
+      <p>&copy; NGE Industries</p>
+  </footer>
+
+    <script>
+      const serverIp = '';
+
+
+      function dropdown(){
+    var settings = document.getElementsByClassName("dropdown");
+
+    document.addEventListener("click", function(event) {
+        if (!event.target.matches('.dropdown') && !event.target.matches('.dropdown-content')) {
+            for (var i = 0; i < settings.length; i++) {
+                settings[i].classList.remove("active");
+            }
+        }
+    });
+    
+    for (var i = 0; i < settings.length; i++) {
+        settings[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+        });
+    }
+    
+}
+dropdown();
+
+      document.getElementById('allDays').addEventListener('change', function() {
+        if (this.checked) {
+          document.getElementById('alternateDays').checked = false;
+          document.getElementById('customDays').checked = false;
+          toggleCustomDays(false);
+        }
+      });
+
+      document.getElementById('alternateDays').addEventListener('change', function() {
+        if (this.checked) {
+          document.getElementById('allDays').checked = false;
+          document.getElementById('customDays').checked = false;
+          toggleCustomDays(false);
+        }
+      });
+
+      document.getElementById('customDays').addEventListener('change', function() {
+        if (this.checked) {
+          document.getElementById('allDays').checked = false;
+          document.getElementById('alternateDays').checked = false;
+          toggleCustomDays(true);
+        } else {
+          toggleCustomDays(false);
+        }
+      });
+
+      function toggleCustomDays(show) {
+        const checkboxes = document.querySelectorAll('.day-checkbox');
+        checkboxes.forEach(checkbox => {
+          checkbox.style.display = show ? 'inline-block' : 'none';
+        });
+      }
+
+      function addSchedule() {
+        const startTime = document.getElementById('startTime').value;
+        const endTime = document.getElementById('endTime').value;
+        let days = [];
+        if (document.getElementById('allDays').checked) {
+          days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        } else if (document.getElementById('alternateDays').checked) {
+          days = ['Monday', 'Wednesday', 'Friday', 'Sunday'];
+        } else if (document.getElementById('customDays').checked) {
+          const checkboxes = document.querySelectorAll('.day-checkbox:checked');
+          checkboxes.forEach(checkbox => {
+            days.push(checkbox.value);
+          });
+        }
+        if (days.length === 0) {
+          alert('Please select at least one day.');
+          return;
+        }
+        // fetch(${serverIp}/add_schedule?start=${startTime}&end=${endTime}&days=${days.join(',')})
+        //   .then(response => response.json())
+        //   .then(data => {
+        //     alert('Schedule added successfully.');
+        //     fetchSchedules();
+        //   })
+        //   .catch(error => {
+        //     console.error('Error:', error);
+        //   });
+      }
+
+    //   function removeSchedule(start, end) {
+    //     fetch(${serverIp}/remove_schedule?start=${start}&end=${end})
+    //       .then(response => response.json())
+    //       .then(data => {
+    //         alert('Schedule removed successfully.');
+    //         fetchSchedules();
+    //       })
+    //       .catch(error => {
+    //         console.error('Error:', error);
+    //       });
+    //   }
+
+    //   function fetchSchedules() {
+    //     fetch(${serverIp}/get_schedules)
+    //       .then(response => response.json())
+    //       .then(data => {
+    //         const scheduleList = document.getElementById('scheduleList');
+    //         scheduleList.innerHTML = '';
+    //         data.schedules.forEach(schedule => {
+    //           const li = document.createElement('li');
+    //           li.innerHTML = ${schedule.start} - ${schedule.end} (${schedule.days}) <button onclick="removeSchedule('${schedule.start}', '${schedule.end}')">Remove</button>;
+    //           scheduleList.appendChild(li);
+    //         });
+    //       })
+    //       .catch(error => console.error('Error:', error));
+    //   }
+
+    //   function controlMotor(action) {
+    //     fetch(${serverIp}/motor/${action})
+    //       .then(response => response.json())
+    //       .then(data => {
+    //         alert(Motor status: ${data.status});
+    //         updateStatus();
+    //       })
+    //       .catch(error => {
+    //         console.error('Error:', error);
+    //       });
+    //   }
+
+    //   function updateStatus() {
+    //     ['motor', 'rain', 'soil'].forEach(sensor => {
+    //       fetch(${serverIp}/${sensor}/status)
+    //         .then(response => response.json())
+    //         .then(data => {
+    //           document.getElementById(${sensor}Status).innerText = data.status;
+    //         })
+    //         .catch(error => console.error('Error:', error));
+    //     });
+    //   }
+
+    //   function fetchHistoryLog() {
+    //     fetch(${serverIp}/historylog)
+    //       .then(response => response.json())
+    //       .then(data => {
+    //         const historyLog = document.getElementById('historyLog');
+    //         historyLog.innerHTML = '';
+    //         data.history.forEach(entry => {
+    //           const li = document.createElement('li');
+    //           li.innerText = entry;
+    //           historyLog.appendChild(li);
+    //         });
+    //       })
+    //       .catch(error => console.error('Error:', error));
+    //   }
+      setInterval(updateStatus, 5000);
+      fetchSchedules();
+      setInterval(fetchHistoryLog, 5000);
+    </script>
+  </body>
+</html>

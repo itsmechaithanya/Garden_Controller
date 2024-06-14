@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garden Controller</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"rel="stylesheet"/>
+    <script src="https://kit.fontawesome.com/f453e56a2f.js" crossorigin="anonymous"></script>
+    <style>
+         @font-face {
+        font-family:Gilroy-SemiBold ;
+        src: url(./Gilroy-SemiBold.woff2);
+      }
+        * { 
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Gilroy-SemiBold;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;  
+        }
+        #name {
+            height: 40vh;
+            width: 100%;
+            padding: 2vw;
+            border-bottom: solid 1px black;
+        }
+        #name > h1 {
+            display: flex;
+            text-align: left;
+            font-size: 10vw;
+            letter-spacing: -1px;
+            font-weight: 500;
+            line-height: 8vw;
+            color: rgb(0, 0, 0);
+        }
+        #place {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        #place > h4, #place h3 {
+            font-size: 30px;
+            font-weight: 400;
+            padding-left: 15px;
+        }
+        #nav {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 10px 10px;
+        }
+        #nav i {
+            padding-right: 5px;
+        }
+        #nav h3 {
+            background-color: beige;
+            padding: 10px 14px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            box-shadow: 2px 6px 14px 2px rgba(0,0,0,0.2);
+        }
+        .dropdown {
+            margin: 1%;
+            position: relative;
+            display: inline-block;
+            padding: 12px 14px;
+            border-radius: 5px;
+            font-size: 20px;
+            font-weight: 500;
+            background-color: rgb(0, 0, 0); 
+            color: white;
+            border-radius: 60em; 
+            box-shadow: 2px 6px 14px 2px rgba(0,0,0,0.2);
+            border: none;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            color: #000;
+            background-color: rgb(255, 255, 255);
+            margin-top: 1vw;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 20px;
+            left: calc(50% - 10px); /* Adjust 80px to match button text width */
+            transform: translateX(-50%);
+        }
+        .dropdown-content a {
+            color: rgb(0, 0, 0);
+            width: 10vw;
+            padding: 15px 18px;
+            text-decoration: none;
+            display: block;
+            display: flex;
+            justify-content: space-evenly;
+            font-weight: 200;
+        }
+        .dropdown-content a:hover {
+            color: #ffffff;
+            background-color: rgb(0, 0, 0);
+            border-radius: 20px;
+            display: flex;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        }
+        .dropdown.active .dropdown-content {
+            display: block;
+        }
+        #ttime {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: rgb(238, 235, 235);
+            border-bottom: #000 solid 1px;
+            padding: 1vw 15vw;
+        }
+        #ftime, #stime {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #endTime, #startTime {
+            padding: .8vw 2vw;
+            margin: 1vw;
+            border: none;
+            border-radius: 5vw;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+        #mid {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2vw 0vw;
+            gap: 5vw;
+        }
+        #down{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2vw;
+            margin-top: 3vw;
+        }
+        .day-button, .selection-button,#down>button {
+            padding: 1vw 2vw;
+            font-size: 1vw;
+            margin: 5px;
+            border: none;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            border-radius: 5vw;
+            cursor: pointer;
+            background-color: white;
+        }
+        #customDaysContainer {
+            display: flex;
+            justify-content: center;
+            gap: 2vw;
+        }
+    </style>
+</head>
+<body>
+    <div id="name">
+        <h1>Garden<br>Controller</h1>
+        <div id="place">
+            <h3> - An NGE Industries Product - </h3>
+            <h4><i class="ri-arrow-right-down-line"></i>Automatic</h4>
+        </div>
+    </div>
+    <div id="nav">
+  <button class="dropdown"><i class="ri-exchange-fill"></i>Change</calssbutton>
+      <div class="dropdown-content">
+        <a href="index.html"><p>Home</p><i class="ri-home-2-fill"></i></a>
+        <a href="manual.html"><p>Automatic</p><i class="fa-solid fa-robot"></i></a>
+      </div>
+    </div> 
+    <div id="ttime">    
+        <div id="ftime">
+            <label for="startTime"><h3>Start Time:</h3></label>
+            <input type="time" id="startTime" name="startTime">
+        </div>
+        <div id="stime">
+            <label for="endTime"><h3>End Time:</h3></label>
+            <input type="time" id="endTime" name="endTime">
+        </div>
+    </div>
+
+    <div id="mid">
+        <button id="allDaysButton" class="selection-button">All Days</button>
+        <button id="alternateDaysButton" class="selection-button">Alternate Days</button>
+        <button id="customDaysButton" class="selection-button">Custom Days</button>
+    </div>
+    <div id="customDaysContainer">
+        <button id="monday" value="Monday" class="day-button">Monday</button>
+        <button id="tuesday" value="Tuesday" class="day-button">Tuesday</button>
+        <button id="wednesday" value="Wednesday" class="day-button">Wednesday</button>
+        <button id="thursday" value="Thursday" class="day-button">Thursday</button>
+        <button id="friday" value="Friday" class="day-button">Friday</button>
+        <button id="saturday" value="Saturday" class="day-button">Saturday</button>
+        <button id="sunday" value="Sunday" class="day-button">Sunday</button>
+    </div>
+    <div id="down">
+        <button id="turnOnButton" onclick="controlMotor('on')">Turn Motor ON</button>
+        <button onclick="addSchedule()">Add Schedule</button>
+        <button id="turnOffButton" onclick="controlMotor('off')">Turn Motor OFF</button>
+      </div>
+    <script>
+      function dropdown(){
+            var settings = document.getElementsByClassName("dropdown");
+
+            document.addEventListener("click", function(event) {
+                if (!event.target.matches('.dropdown') && !event.target.matches('.dropdown-content')) {
+                    for (var i = 0; i < settings.length; i++) {
+                        settings[i].classList.remove("active");
+                    }
+                }
+            });
+            
+            for (var i = 0; i < settings.length; i++) {
+                settings[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                });
+            }
+            
+        }
+        dropdown();
+
+        document.getElementById('allDaysButton').addEventListener('click', function() {
+            selectButton('allDaysButton');
+            highlightDays(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']);
+        });
+
+        let alternateDaysPattern = 0;
+
+        document.getElementById('allDaysButton').addEventListener('click', function() {
+            selectButton('allDaysButton');
+            highlightDays(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']);
+        });
+
+        document.getElementById('alternateDaysButton').addEventListener('click', function() {
+            selectButton('alternateDaysButton');
+            if (alternateDaysPattern === 0) {
+                highlightDays(['Monday', 'Wednesday', 'Friday', 'Sunday']);
+                alternateDaysPattern = 1;
+            } else {
+                highlightDays(['Tuesday', 'Thursday', 'Saturday']);
+                alternateDaysPattern = 0;
+            }
+        });
+
+        document.getElementById('customDaysButton').addEventListener('click', function() {
+            selectButton('customDaysButton');
+            highlightDays([]); // Custom days will be highlighted individually
+        });
+
+        document.getElementById('customDaysButton').addEventListener('click', function() {
+            selectButton('customDaysButton');
+            highlightDays([]); // Custom days will be highlighted individually
+        });
+
+        function selectButton(buttonId) {
+            const buttons = document.querySelectorAll('.selection-button');
+            buttons.forEach(button => {
+                button.style.backgroundColor = ''; // Reset background color
+                button.style.color = ''; // Reset text color
+            });
+            document.getElementById(buttonId).style.backgroundColor = 'black';
+            document.getElementById(buttonId).style.color = 'white';
+        }
+
+        function highlightDays(days) {
+            const dayButtons = document.querySelectorAll('.day-button');
+            dayButtons.forEach(button => {
+                if (days.includes(button.value)) {
+                    button.style.backgroundColor = 'black';
+                    button.style.color = 'white';
+                } else {
+                    button.style.backgroundColor = '';
+                    button.style.color = '';
+                }
+            });
+        }
+
+        const dayButtons = document.querySelectorAll('.day-button');
+        dayButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                if (document.getElementById('customDaysButton').style.backgroundColor === 'black') {
+                    if (this.style.backgroundColor === 'black') {
+                        this.style.backgroundColor = '';
+                        this.style.color = '';
+                    } else {
+                        this.style.backgroundColor = 'black';
+                        this.style.color = 'white';
+                    }
+                }
+            });
+        });
+
+        function addSchedule() {
+        const startTime = document.getElementById('startTime').value;
+        const endTime = document.getElementById('endTime').value;
+        let days = [];
+        if (document.getElementById('allDaysButton').style.backgroundColor === 'black') {
+            days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        } else if (document.getElementById('alternateDaysButton').style.backgroundColor === 'black') {
+            if (alternateDaysPattern === 0) {
+                days = ['Tuesday', 'Thursday', 'Saturday'];
+            } else {
+                days = ['Monday', 'Wednesday', 'Friday', 'Sunday'];
+            }
+        } else if (document.getElementById('customDaysButton').style.backgroundColor === 'black') {
+            const selectedDays = document.querySelectorAll('.day-button');
+            selectedDays.forEach(button => {
+                if (button.style.backgroundColor === 'black') {
+                    days.push(button.value);
+                }
+            });
+        }
+        if (days.length === 0) {
+            alert('Please select at least one day.');
+            return;
+        }
+           
+        }
+    </script>
+</body>
+</html>
